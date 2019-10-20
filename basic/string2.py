@@ -1,3 +1,4 @@
+from math import ceil
 #!/usr/bin/python2.4 -tt
 # Copyright 2010 Google Inc.
 # Licensed under the Apache License, Version 2.0
@@ -18,7 +19,12 @@
 # Return the resulting string.
 def verbing(s):
     # +++your code here+++
-    return
+    result = s
+
+    if len(result) >= 3:
+        result =  s + 'ing' if s[-3:] != 'ing' else s + 'ly'
+
+    return result
 
 
 # E. not_bad
@@ -31,7 +37,14 @@ def verbing(s):
 # This dinner is good!
 def not_bad(s):
     # +++your code here+++
-    return
+    is_not_bad = False
+    not_index = s.find('not')
+    bad_index = s.find('bad')
+
+    if not_index < bad_index:
+        is_not_bad = True
+    
+    return s.replace(s[not_index:bad_index + 3], 'good') if is_not_bad else s
 
 
 # F. front_back
@@ -43,7 +56,14 @@ def not_bad(s):
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
     # +++your code here+++
-    return
+    a_splitter = int(len(a) / 2 if len(a) % 2 == 0 else ceil(len(a) / 2))
+    a_front = a[:a_splitter]
+    a_back = a[a_splitter:]
+    b_splitter = int(len(b) / 2 if len(b) % 2 == 0 else ceil(len(b) / 2))
+    b_front = b[:b_splitter]
+    b_back = b[b_splitter:]
+
+    return a_front + b_front + a_back + b_back
 
 
 # Simple provided test() function used in main() to print
